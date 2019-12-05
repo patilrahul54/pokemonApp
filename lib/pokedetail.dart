@@ -21,11 +21,11 @@ class PokeDetail extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Positioned(
-          height: MediaQuery.of(context).size.height /  1.5,
+          height: MediaQuery.of(context).size.height / 1.5,
           width: MediaQuery.of(context).size.width - 20,
           left: 10,
           top: MediaQuery.of(context).size.height * 0.12,
-          child: Card( 
+          child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
             child: Column(
@@ -66,19 +66,32 @@ class PokeDetail extends StatelessWidget {
                           ))
                       .toList(),
                 ),
+                Text("Next Evolution"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: pokemon.nextEvolution
+                      .map((f) => FilterChip(
+                            label: Text(f.name),
+                            backgroundColor: Colors.amber,
+                            onSelected: (b) {},
+                          ))
+                      .toList(),
+                )
               ],
             ),
           ),
         ),
         Align(
           alignment: Alignment.topCenter,
-          child: Hero(tag: pokemon.img, child: Container(
-            height: 200,
-            width: 200,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(pokemon.img), fit: BoxFit.cover)
-            ),
-          )),
+          child: Hero(
+              tag: pokemon.img,
+              child: Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(pokemon.img), fit: BoxFit.cover)),
+              )),
         )
       ],
     );
