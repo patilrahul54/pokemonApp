@@ -29,6 +29,7 @@ class _HomepageState extends State<HomePage> {
   }
 
   fetchData() async {
+    pokeHub = null;
     var res = await http.get(url);
     var jsondede = jsonDecode(res.body);
     pokeHub = PokeHub.fromJson(jsondede);
@@ -44,7 +45,9 @@ class _HomepageState extends State<HomePage> {
       // drawer: Drawer(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.refresh),
-        onPressed: () {},
+        onPressed: () {
+          this.fetchData();
+        },
       ),
       body: pokeHub == null
           ? Center(
@@ -54,36 +57,51 @@ class _HomepageState extends State<HomePage> {
               crossAxisCount: 2,
               children: pokeHub.pokemon
                   .map((poke) => InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> PokeDetail(
-                        pokemon: poke,
-                      )));
-                    },
-                                      child: Card(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PokeDetail(
+                                        pokemon: poke,
+                                      )));
+                        },
+                        child: Card(
                           elevation: 3.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Hero(
                                 child: Container(
-                                  height: 100.0,
-                                  width: 100.0,
+                                  height: 120.0,
+                                  width: 120.0,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: NetworkImage(poke.img))),
                                 ),
                                 tag: poke.img,
                               ),
-                              Center(
-                                  child: Text(
-                                poke.name,
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              )),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Text(
+                                    (poke.num + "."),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    poke.name,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                  ))
+                      ))
                   .toList(),
             ),
     );

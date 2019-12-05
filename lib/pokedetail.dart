@@ -33,11 +33,24 @@ class PokeDetail extends StatelessWidget {
               // mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
-                  height: 100,
+                  height: 120,
                 ),
-                Text(
-                  pokemon.name,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        (pokemon.num + "."),
+                        style:
+                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        pokemon.name,
+                        style:
+                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
                 Text("Height : ${pokemon.height}"),
                 Text("Weight : ${pokemon.weight}"),
@@ -66,17 +79,22 @@ class PokeDetail extends StatelessWidget {
                           ))
                       .toList(),
                 ),
-                Text("Next Evolution"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: pokemon.nextEvolution
-                      .map((f) => FilterChip(
-                            label: Text(f.name),
-                            backgroundColor: Colors.amber,
-                            onSelected: (b) {},
-                          ))
-                      .toList(),
-                )
+                // chekeknextEvolution(),
+                (pokemon.nextEvolution != null)
+                    ? Text("Next Evolution")
+                    : Container(),
+                (pokemon.nextEvolution != null)
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: pokemon.nextEvolution
+                            .map((f) => FilterChip(
+                                  label: Text(f.name),
+                                  backgroundColor: Colors.lime,
+                                  onSelected: (b) {},
+                                ))
+                            .toList(),
+                      )
+                    : Container()
               ],
             ),
           ),
