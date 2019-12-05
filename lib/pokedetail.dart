@@ -41,7 +41,7 @@ class PokeDetail extends StatelessWidget {
                 ),
                 Text("Height : ${pokemon.height}"),
                 Text("Weight : ${pokemon.weight}"),
-                Text("Types"),
+                Text("Types :"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: pokemon.type
