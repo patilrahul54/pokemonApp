@@ -8,7 +8,7 @@ import 'package:mypokemonapp/pokemon.dart';
 void main() => runApp(MaterialApp(
       title: "My Pokemon App",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: ThemeData(primarySwatch: Colors.red),
       home: HomePage(),
     ));
 

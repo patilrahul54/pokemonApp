@@ -8,13 +8,69 @@ class PokeDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.red,
       appBar: AppBar(
         title: Text(pokemon.name),
         elevation: 0.0,
       ),
       body: bodyWidget(context),
     );
+  }
+
+  returnBackColor(type) {
+    print(type);
+    switch (type) {
+      case 'Normal':
+        return (Colors.grey);
+        break;
+      case 'Water':
+        return (Colors.lightBlue);
+        break;
+      case 'Ground':
+        return (Colors.grey);
+        break;
+      case 'Rock':
+        return (Colors.amber);
+        break;
+      case 'Fire':
+        return (Colors.red);
+        break;
+      case 'Ice':
+        return (Colors.lightBlueAccent);
+        break;
+      case 'Flying':
+        return (Colors.lightBlueAccent);
+        break;
+      case 'Psychic':
+        return (Colors.pinkAccent);
+        break;
+      case 'Electric':
+        return (Colors.yellow);
+        break;
+      case 'Grass':
+        return (Colors.green);
+        break;
+      case 'Fighting':
+        return (Colors.red);
+        break;
+      case 'Dark':
+        return (Colors.brown);
+        break;
+      case 'Bug':
+        return (Colors.lime);
+        break;
+      case 'Ghost':
+        return (Colors.blue);
+        break;
+      case 'Dragon':
+        return (Colors.purple);
+        break;
+      case 'Fairy':
+        return (Colors.purpleAccent);
+        break;
+      default:
+        return (Colors.amber);
+    }
   }
 
   bodyWidget(BuildContext context) {
@@ -40,14 +96,14 @@ class PokeDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        (pokemon.num + "."),
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        (pokemon.num + ". "),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         pokemon.name,
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -63,20 +119,23 @@ class PokeDetail extends StatelessWidget {
                               t,
                               style: TextStyle(color: Colors.white),
                             ),
-                            backgroundColor: Colors.teal,
+                            backgroundColor: this.returnBackColor(t),
                             onSelected: (b) {},
                           ))
                       .toList(),
                 ),
                 Text("Weaknesses"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Wrap(
+                  alignment : WrapAlignment.center,
                   children: pokemon.weaknesses
-                      .map((t) => FilterChip(
-                            label: Text(t),
-                            backgroundColor: Colors.amber,
-                            onSelected: (b) {},
-                          ))
+                      .map((t) => Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: FilterChip(
+                                label: Text(t),
+                                backgroundColor: this.returnBackColor(t),
+                                onSelected: (b) {},
+                              ),
+                            ))
                       .toList(),
                 ),
                 // chekeknextEvolution(),
