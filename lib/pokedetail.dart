@@ -77,7 +77,7 @@ class PokeDetail extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Positioned(
-          height: MediaQuery.of(context).size.height / 1.5,
+          // height: MediaQuery.of(context).size.height / 1.5,
           width: MediaQuery.of(context).size.width - 20,
           left: 10,
           top: MediaQuery.of(context).size.height * 0.12,
@@ -108,20 +108,32 @@ class PokeDetail extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text("Height : ${pokemon.height}"),
-                Text("Weight : ${pokemon.weight}"),
-                Text("Types :"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Text("Height : ${pokemon.height}"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Text("Weight : ${pokemon.weight}"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Text("Types :"),
+                ),
+                Wrap(
+                  alignment : WrapAlignment.center,
                   children: pokemon.type
-                      .map((t) => FilterChip(
-                            label: Text(
-                              t,
-                              style: TextStyle(color: Colors.white),
+                      .map((t) => Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: FilterChip(
+                              label: Text(
+                                t,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: this.returnBackColor(t),
+                              onSelected: (b) {},
                             ),
-                            backgroundColor: this.returnBackColor(t),
-                            onSelected: (b) {},
-                          ))
+                      ))
                       .toList(),
                 ),
                 Text("Weaknesses"),
@@ -131,7 +143,7 @@ class PokeDetail extends StatelessWidget {
                       .map((t) => Padding(
                               padding: const EdgeInsets.all(2.0),
                               child: FilterChip(
-                                label: Text(t),
+                                label: Text(t,style: TextStyle(color: Colors.white)),
                                 backgroundColor: this.returnBackColor(t),
                                 onSelected: (b) {},
                               ),
@@ -147,7 +159,7 @@ class PokeDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: pokemon.nextEvolution
                             .map((f) => FilterChip(
-                                  label: Text(f.name),
+                                  label: Text(f.name,style: TextStyle(color: Colors.white)),
                                   backgroundColor: Colors.lime,
                                   onSelected: (b) {},
                                 ))

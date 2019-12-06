@@ -30,6 +30,7 @@ class _HomepageState extends State<HomePage> {
 
   fetchData() async {
     pokeHub = null;
+    setState(() {});
     var res = await http.get(url);
     var jsondede = jsonDecode(res.body);
     pokeHub = PokeHub.fromJson(jsondede);
@@ -41,6 +42,8 @@ class _HomepageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("My App"),
+        elevation: 0.0,
+        backgroundColor: Colors.red,
       ),
       // drawer: Drawer(),
       floatingActionButton: FloatingActionButton(
@@ -55,6 +58,7 @@ class _HomepageState extends State<HomePage> {
             )
           : GridView.count(
               crossAxisCount: 2,
+              padding: EdgeInsets.all(4.0),
               children: pokeHub.pokemon
                   .map((poke) => InkWell(
                         onTap: () {
@@ -66,9 +70,9 @@ class _HomepageState extends State<HomePage> {
                                       )));
                         },
                         child: Card(
-                          elevation: 3.0,
+                          elevation: 4.0,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Hero(
                                 child: Container(
@@ -80,20 +84,19 @@ class _HomepageState extends State<HomePage> {
                                 ),
                                 tag: poke.img,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                              Wrap(
+                                alignment : WrapAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    (poke.num + "."),
+                                    (poke.num + ". "),
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     poke.name,
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -104,6 +107,7 @@ class _HomepageState extends State<HomePage> {
                       ))
                   .toList(),
             ),
+            // backgroundColor: Colors.redAccent,
     );
   }
 }
